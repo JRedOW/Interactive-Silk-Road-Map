@@ -12,12 +12,18 @@
 <script>
   var canvas = document.getElementById("myCanvas");
   var context = canvas.getContext('2d');
+  var location = 0;
   function make_base()
   {
     var base_image = new Image();
     base_image.src = 'route-map.png';
     base_image.onload = function(){
       context.drawImage(base_image, 0, 0, 1000, 750);
+    }
+    var info_image = new Image();
+    info_image.src = 'route-map.png';
+    info_image.onload = function(){
+      context.drawImage(info_image, 0, 0, 50, 50);
     }
   }
   make_base();
