@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="500" height="400"></canvas>
+<canvas id="myCanvas" width="1000" height="750"></canvas>
   
 <script>
   var canvas = document.getElementById("myCanvas");
@@ -17,7 +17,7 @@
     var base_image = new Image();
     base_image.src = 'route-map.png';
     base_image.onload = function(){
-      context.drawImage(base_image, 0, 0, 500, 325);
+      context.drawImage(base_image, 0, 0, 1000, 750);
     }
   }
   make_base();
