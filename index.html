@@ -1,1 +1,26 @@
-<canvas id="viewport"></canvas>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>A Interactive Map of the Silk Road.</title>
+    <style>* { padding: 0; margin: 0; } canvas { background: #eee; display: block; margin: 0 auto; }</style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="400"></canvas>
+  
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext('2d');
+  function make_base()
+  {
+    var base_image = new Image();
+    base_image.src = 'route-map.png';
+    base_image.onload = function(){
+      context.drawImage(base_image, 0, 0);
+    }
+  }
+</script>
+
+</body>
+</html>
