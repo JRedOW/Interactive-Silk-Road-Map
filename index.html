@@ -7,13 +7,15 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="1000" height="750"></canvas>
+<canvas id="myCanvas" width="1000" height="750" onmousedown="click_event(event)"></canvas>
   
 <script>
   var canvas = document.getElementById("myCanvas");
   var context = canvas.getContext('2d');
   var info_location = 0;
-  var items = [[],["glass","grapes","figs","olives"],["horses","jade","furs","gold"],["spices","buddhism",],["wheelbarrow","compass","ironwork","chainpump","silk","paper","dishwork","castiron","ornaments","pears","kiwi","peaches","apricots","millet","rice"]]
+  var info_page = 1;
+  var allow_right_left = "f";
+  var items = [["Glass","Grapes","Figs","Olives"],["Horses","Jade","Furs","Gold"],["Spices","Buddhism",],["Wheel Barrow","Compass","Ironwork","Chain Pump","Silk","Paper","Dishwork","Cast Iron","Ornaments","Pears","Kiwi","Peaches","Apricots","Millet","Rice"]]
   function make_base()
   {
     var base_image = new Image();
@@ -30,7 +32,128 @@
       context.drawImage(info_image, 580, 200, 70, 70);  //Central Asia (2)
     }
   }
-  make_base();
+  function click_event(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    if (x >= 60 && x <= 110 && y >= 250 && y <= 300) { //Mediterranean
+      var info_location = 1;
+      var info_page = 1;
+    }
+    if (x >= 620 && x <= 690 && y >= 450 && y <= 520) { //India
+      var info_location = 3;
+      var info_page = 1;
+    }
+    if (x >= 860 && x <= 930 && y >= 300 && y <= 370) { //China
+      var info_location = 4;
+      var info_page = 1;
+    }
+    if (x >= 580 && x <= 650 && y >= 200 && y <= 270) { //Central Asia
+      var info_location = 2;
+      var info_page = 1;
+    }
+    if (allow_right_left == "t") {
+      if (x >= 30 && x <= 100 && y >= 660 && y<= 730) { //Left
+        if (items[info_location] > 6 && Math.ceil(items[info_location]/6) >= info_page && info_page >= 1) {
+          info_page -= 1
+        }
+      }
+      if (x >= 870 && x <= 940 && y >= 660 && y<= 730) { //Right
+        if (items[info_location] > 6 && Math.ceil(items[info_location]/6) > info_page && info_page >= 1) {
+          info_page += 1
+        }
+      }
+    }
+  }
+  function make_items() {
+    var items_locations = [[30,660],[150,660],[270,660],[390,660],[510,660],[630,660],[750,660],[870,660]];
+    if (items[info_location] <= 6) {
+      var items_on_page = items[info_location];
+    } else {
+      var items_on_page = [items[info_location][(info_page - 1)*6],items[info_location][(info_page - 1)*6 + 1],items[info_location][(info_page - 1)*6 + 2],items[info_location][(info_page - 1)*6 + 3],items[info_location][(info_page - 1)*6 + 4],items[info_location][(info_page - 1)*6 + 5]]
+    }
+    if (items[info_location] == 2) {
+      var item_image = new Image();
+      item_image.src = items_on_page[0]+".png";
+      item_image.onload = function(){
+        context.drawImage(item_image, items_locations[2][0], items_locations[2][1], 70, 70);
+      }
+      var item_image_two = new Image();
+      item_image_two.src = items_on_page[1]+".png";
+      item_image_two.onload = function(){
+        context.drawImage(item_image_two, items_locations[5][0], items_locations[5][1], 70, 70);
+      }
+    }
+    if (items[info_location] == 4) {
+      var item_image = new Image();
+      item_image.src = items_on_page[0]+".png";
+      item_image.onload = function(){
+        context.drawImage(item_image, items_locations[1][0], items_locations[1][1], 70, 70);
+      }
+      var item_image_two = new Image();
+      item_image_two.src = items_on_page[1]+".png";
+      item_image_two.onload = function(){
+        context.drawImage(item_image_two, items_locations[3][0], items_locations[3][1], 70, 70);
+      }
+      var item_image_three = new Image();
+      item_image_three.src = items_on_page[2]+".png";
+      item_image_three.onload = function(){
+        context.drawImage(item_image_three, items_locations[5][0], items_locations[5][1], 70, 70);
+      }
+      var item_image_four = new Image();
+      item_image_four.src = items_on_page[3]+".png";
+      item_image_four.onload = function(){
+        context.drawImage(item_image_four, items_locations[7][0], items_locations[7][1], 70, 70);
+      }
+    }
+    if (items[info_location] > 6) {
+      var item_image = new Image();
+      item_image.src = items_on_page[0]+".png";
+      item_image.onload = function(){
+        context.drawImage(item_image, items_locations[1][0], items_locations[1][1], 70, 70);
+      }
+      var item_image_two = new Image();
+      item_image_two.src = items_on_page[1]+".png";
+      item_image_two.onload = function(){
+        context.drawImage(item_image_two, items_locations[2][0], items_locations[2][1], 70, 70);
+      }
+      var item_image_three = new Image();
+      item_image_three.src = items_on_page[2]+".png";
+      item_image_three.onload = function(){
+        context.drawImage(item_image_three, items_locations[3][0], items_locations[3][1], 70, 70);
+      }
+      var item_image_four = new Image();
+      item_image_four.src = items_on_page[3]+".png";
+      item_image_four.onload = function(){
+        context.drawImage(item_image_four, items_locations[4][0], items_locations[4][1], 70, 70);
+      }
+      var item_image_five = new Image();
+      item_image_five.src = items_on_page[2]+".png";
+      item_image_five.onload = function(){
+        context.drawImage(item_image_five, items_locations[5][0], items_locations[5][1], 70, 70);
+      }
+      var item_image_six = new Image();
+      item_image_six.src = items_on_page[3]+".png";
+      item_image_six.onload = function(){
+        context.drawImage(item_image_six, items_locations[6][0], items_locations[6][1], 70, 70);
+      }
+      var item_image_left = new Image();
+      item_image_left.src = "left.png";
+      item_image_left.onload = function(){
+        context.drawImage(item_image_left, items_locations[0][0], items_locations[0][1], 70, 70);
+      }
+      var item_image_right = new Image();
+      item_image_right.src = "right.png";
+      item_image_right.onload = function(){
+        context.drawImage(item_image_right, items_locations[7][0], items_locations[7][1], 70, 70);
+      }
+    }
+  }
+  function main_loop() {
+    make_base();
+    make_items();
+    var allow_right_left = "t"
+  }
+  var t=setInterval(main_loop(),500);
 </script>
 
 </body>
