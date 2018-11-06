@@ -35,8 +35,9 @@
     }
   }
   function click_event(event) {
-    var x = event.clientX;
-    var y = event.clientY;
+    var rect = canvas.getBounsingClientRect;
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
     document.getElementById("location_num2").innerHTML = x + " " + y;
     if (x >= 60 && x <= 110 && y >= 250 && y <= 300) { //Mediterranean
       document.getElementById("location_num").innerHTML = "clicky";
