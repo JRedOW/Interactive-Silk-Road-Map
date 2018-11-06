@@ -9,6 +9,7 @@
 
 <canvas id="myCanvas" width="1000" height="750" onmousedown="click_event(event)"></canvas>
 <p id="location_num"></p>
+<p id="location_num2"></p>
   
 <script>
   var canvas = document.getElementById("myCanvas");
@@ -34,22 +35,26 @@
     }
   }
   function click_event(event) {
-    document.getElementById("location_num").innerHTML = "clicky";
     var x = event.clientX;
     var y = event.clientY;
+    document.getElementById("location_num2").innerHTML = x + " " + y;
     if (x >= 60 && x <= 110 && y >= 250 && y <= 300) { //Mediterranean
+      document.getElementById("location_num").innerHTML = "clicky";
       var info_location = 1;
       var info_page = 1;
     }
     if (x >= 620 && x <= 690 && y >= 450 && y <= 520) { //India
+      document.getElementById("location_num").innerHTML = "clicky";
       var info_location = 3;
       var info_page = 1;
     }
     if (x >= 860 && x <= 930 && y >= 300 && y <= 370) { //China
+      document.getElementById("location_num").innerHTML = "clicky";
       var info_location = 4;
       var info_page = 1;
     }
     if (x >= 580 && x <= 650 && y >= 200 && y <= 270) { //Central Asia
+      document.getElementById("location_num").innerHTML = "clicky";
       var info_location = 2;
       var info_page = 1;
     }
