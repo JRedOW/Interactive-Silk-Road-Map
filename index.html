@@ -34,6 +34,7 @@
     }
   }
   function click_event(event) {
+    document.getElementById("location_num").innerHTML = "clicky";
     var x = event.clientX;
     var y = event.clientY;
     if (x >= 60 && x <= 110 && y >= 250 && y <= 300) { //Mediterranean
@@ -153,7 +154,6 @@
     make_base();
     make_items();
     var allow_right_left = "t";
-    document.getElementById("location_num").innerHTML = info_location;
   }
   var t=setInterval(main_loop(),500);
 </script>
