@@ -8,6 +8,7 @@
 <body>
 
 <canvas id="myCanvas" width="1000" height="750" onmousedown="click_event(event)"></canvas>
+<p id="location_num"></p>
   
 <script>
   var canvas = document.getElementById("myCanvas");
@@ -15,7 +16,7 @@
   var info_location = 0;
   var info_page = 1;
   var allow_right_left = "f";
-  var items = [["Glass","Grapes","Figs","Olives"],["Horses","Jade","Furs","Gold"],["Spices","Buddhism"],["Wheel Barrow","Compass","Ironwork","Chain Pump","Silk","Paper","Dishwork","Cast Iron","Ornaments","Pears","Kiwi","Peaches","Apricots","Millet","Rice"]]
+  var items = [["Glass","Grapes","Figs","Olives"],["Horses","Jade","Furs","Gold"],["Spices","Buddhism"],["Wheel Barrow","Compass","Ironwork","Chain Pump","Silk","Paper","Dishwork","Cast Iron","Ornaments","Pears","Kiwi","Peaches","Apricots","Millet","Rice"]];
   function make_base()
   {
     var base_image = new Image();
@@ -54,12 +55,12 @@
     if (allow_right_left == "t") {
       if (x >= 30 && x <= 100 && y >= 660 && y<= 730) { //Left
         if (items[info_location] > 6 && Math.ceil(items[info_location]/6) >= info_page && info_page >= 1) {
-          info_page -= 1
+          info_page -= 1;
         }
       }
       if (x >= 870 && x <= 940 && y >= 660 && y<= 730) { //Right
         if (items[info_location] > 6 && Math.ceil(items[info_location]/6) > info_page && info_page >= 1) {
-          info_page += 1
+          info_page += 1;
         }
       }
     }
@@ -69,7 +70,7 @@
     if (items[info_location] <= 6) {
       var items_on_page = items[info_location];
     } else {
-      var items_on_page = [items[info_location][(info_page - 1)*6],items[info_location][(info_page - 1)*6 + 1],items[info_location][(info_page - 1)*6 + 2],items[info_location][(info_page - 1)*6 + 3],items[info_location][(info_page - 1)*6 + 4],items[info_location][(info_page - 1)*6 + 5]]
+      var items_on_page = [items[info_location][(info_page - 1)*6],items[info_location][(info_page - 1)*6 + 1],items[info_location][(info_page - 1)*6 + 2],items[info_location][(info_page - 1)*6 + 3],items[info_location][(info_page - 1)*6 + 4],items[info_location][(info_page - 1)*6 + 5]];
     }
     if (items[info_location] == 2) {
       var item_image = new Image();
@@ -151,7 +152,8 @@
   function main_loop() {
     make_base();
     make_items();
-    var allow_right_left = "t"
+    var allow_right_left = "t";
+    document.getElementById("location_num").innerHTML = info_location;
   }
   var t=setInterval(main_loop(),500);
 </script>
