@@ -13,6 +13,7 @@
   var canvas = document.getElementById("myCanvas");
   var context = canvas.getContext('2d');
   var info_location = 0;
+  var items = [[],["glass","grapes","figs","olives"],["horses","jade","furs","gold"],["spices","buddhism",],["wheelbarrow","compass","ironwork","chainpump","silk","paper","dishwork","castiron","ornaments","pears","kiwi","peaches","apricots","millet","rice"]]
   function make_base()
   {
     var base_image = new Image();
@@ -23,10 +24,10 @@
     var info_image = new Image();
     info_image.src = 'info.png';
     info_image.onload = function(){
-      context.drawImage(info_image, 60, 250, 50, 50);  //Mediterranean
-      context.drawImage(info_image, 620, 450, 70, 70);  //India
-      context.drawImage(info_image, 860, 300, 70, 70);  //China
-      context.drawImage(info_image, 580, 200, 70, 70);  //Central Asia
+      context.drawImage(info_image, 60, 250, 50, 50);  //Mediterranean (1)
+      context.drawImage(info_image, 620, 450, 70, 70);  //India (3)
+      context.drawImage(info_image, 860, 300, 70, 70);  //China (4)
+      context.drawImage(info_image, 580, 200, 70, 70);  //Central Asia (2)
     }
   }
   make_base();
