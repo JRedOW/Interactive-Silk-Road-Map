@@ -10,10 +10,7 @@
 <canvas id="myCanvas" width="1000" height="750" onmousedown="click_event(event)"></canvas>
 
 <h1 id="items"> Blah </h1>
-<p id="location_num"></p>
-<p id="location_num2"></p>
-<p id="randomstuff"></p>
-  
+
 <script>
   var canvas = document.getElementById("myCanvas");
   var context = canvas.getContext('2d');
@@ -44,37 +41,30 @@
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
-    document.getElementById("location_num2").innerHTML = x + " " + y;
     if (x >= 60 && x <= 110 && y >= 250 && y <= 300) { //Mediterranean
-      document.getElementById("location_num").innerHTML = "clicky";
       info_location = 1;
       info_page = 1;
     }
     if (x >= 620 && x <= 690 && y >= 450 && y <= 520) { //India
-      document.getElementById("location_num").innerHTML = "clicky";
       info_location = 3;
       info_page = 1;
     }
     if (x >= 860 && x <= 930 && y >= 300 && y <= 370) { //China
-      document.getElementById("location_num").innerHTML = "clicky";
       info_location = 4;
       info_page = 1;
     }
     if (x >= 580 && x <= 650 && y >= 200 && y <= 270) { //Central Asia
-      document.getElementById("location_num").innerHTML = "clicky";
       info_location = 2;
       info_page = 1;
     }
     if (x >= 30 && x <= 100 && y >= 660 && y<= 730) { //Left
         if (items[info_location].length > 6 && info_page > 1) {
           info_page -= 1;
-          document.getElementById("randomstuff").innerHTML = info_page;
         }
     }
     if (x >= 870 && x <= 940 && y >= 660 && y<= 730) { //Right
         if (items[info_location].length > 6 && Math.ceil(items[info_location].length/6) > info_page) {
           info_page += 1;
-          document.getElementById("randomstuff").innerHTML = info_page;
         }
     }
     window.info_location = info_location;
@@ -91,7 +81,7 @@
     var items_on_page_str = items_on_page.toString();
     var items_on_page_write = items_on_page_str.replace(/,/g,", ");
     var items_on_page_write = items_on_page_write.replace(/, , ,/g,"");
-    document.getElementById("items").innerHTML = "Items:" + items_on_page_write;
+    document.getElementById("items").innerHTML = "Items: " + items_on_page_write;
     if (items[info_location].length == 2) {
       var item_image = new Image();
       item_image.src = items_on_page[0]+".png";
