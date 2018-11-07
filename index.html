@@ -19,17 +19,18 @@
   var context = canvas.getContext('2d');
   var info_location = 0;
   var info_page = 1;
-  var allow_right_left = "f";
+  var allow_right_left = "t";
   var items_locations = [[30,660],[150,660],[270,660],[390,660],[510,660],[630,660],[750,660],[870,660]];
   var items_on_page = [];
   var items = [[],["Glass","Grapes","Figs","Olives"],["Horses","Jade","Furs","Gold"],["Spices","Buddhism"],["Wheel Barrow","Compass","Ironwork","Chain Pump","Silk","Paper","Dishwork","Cast Iron","Ornaments","Pears","Kiwi","Peaches","Apricots","Millet","Rice"]];
-  function make_base()
-  {
+  function make_base1() {
     var base_image = new Image();
     base_image.src = 'route-map.png';
     base_image.onload = function(){
       context.drawImage(base_image, 0, 0, 1000, 650);
     }
+  }
+  function make_base2() {
     var info_image = new Image();
     info_image.src = 'info.png';
     info_image.onload = function(){
@@ -64,27 +65,34 @@
       info_location = 2;
       info_page = 1;
     }
-    if (allow_right_left == "t") {
-      if (x >= 30 && x <= 100 && y >= 660 && y<= 730) { //Left
-        if (items[info_location] > 6 && Math.ceil(items[info_location]/6) >= info_page && info_page >= 1) {
+    if (x >= 30 && x <= 100 && y >= 660 && y<= 730) { //Left
+        if (items[info_location].length > 6 && info_page > 1) {
           info_page -= 1;
+          document.getElementById("randomstuff").innerHTML = info_page;
         }
-      }
-      if (x >= 870 && x <= 940 && y >= 660 && y<= 730) { //Right
-        if (items[info_location] > 6 && Math.ceil(items[info_location]/6) > info_page && info_page >= 1) {
-          info_page += 1;
-        }
-      }
     }
+    if (x >= 870 && x <= 940 && y >= 660 && y<= 730) { //Right
+        if (items[info_location].length > 6 && Math.ceil(items[info_location].length/6) > info_page) {
+          info_page += 1;
+          document.getElementById("randomstuff").innerHTML = info_page;
+        }
+    }
+    window.info_location = info_location;
+    window.info_page = info_page;
+    make_items()
   }
   function make_items() {
-    if (items[info_location] <= 6) {
+    context.clearRect(30,660,970,90);
+    if (items[info_location].length <= 6) {
       items_on_page = items[info_location];
     } else {
       items_on_page = [items[info_location][(info_page - 1)*6],items[info_location][(info_page - 1)*6 + 1],items[info_location][(info_page - 1)*6 + 2],items[info_location][(info_page - 1)*6 + 3],items[info_location][(info_page - 1)*6 + 4],items[info_location][(info_page - 1)*6 + 5]];
     }
-    document.getElementById("items").innerHTML = "Items:" + items_on_page;
-    if (items[info_location] == 2) {
+    var items_on_page_str = items_on_page.toString();
+    var items_on_page_write = items_on_page_str.replace(/,/g,", ");
+    var items_on_page_write = items_on_page_write.replace(/, , ,/g,"");
+    document.getElementById("items").innerHTML = "Items:" + items_on_page_write;
+    if (items[info_location].length == 2) {
       var item_image = new Image();
       item_image.src = items_on_page[0]+".png";
       item_image.onload = function(){
@@ -96,29 +104,29 @@
         context.drawImage(item_image_two, items_locations[5][0], items_locations[5][1], 70, 70);
       }
     }
-    if (items[info_location] == 4) {
+    if (items[info_location].length == 4) {
       var item_image = new Image();
       item_image.src = items_on_page[0]+".png";
       item_image.onload = function(){
-        context.drawImage(item_image, items_locations[1][0], items_locations[1][1], 70, 70);
+        context.drawImage(item_image, items_locations[0][0], items_locations[0][1], 70, 70);
       }
       var item_image_two = new Image();
       item_image_two.src = items_on_page[1]+".png";
       item_image_two.onload = function(){
-        context.drawImage(item_image_two, items_locations[3][0], items_locations[3][1], 70, 70);
+        context.drawImage(item_image_two, items_locations[2][0], items_locations[2][1], 70, 70);
       }
       var item_image_three = new Image();
       item_image_three.src = items_on_page[2]+".png";
       item_image_three.onload = function(){
-        context.drawImage(item_image_three, items_locations[5][0], items_locations[5][1], 70, 70);
+        context.drawImage(item_image_three, items_locations[4][0], items_locations[4][1], 70, 70);
       }
       var item_image_four = new Image();
       item_image_four.src = items_on_page[3]+".png";
       item_image_four.onload = function(){
-        context.drawImage(item_image_four, items_locations[7][0], items_locations[7][1], 70, 70);
+        context.drawImage(item_image_four, items_locations[6][0], items_locations[6][1], 70, 70);
       }
     }
-    if (items[info_location] > 6) {
+    if (items[info_location].length > 6) {
       var item_image = new Image();
       item_image.src = items_on_page[0]+".png";
       item_image.onload = function(){
@@ -140,32 +148,32 @@
         context.drawImage(item_image_four, items_locations[4][0], items_locations[4][1], 70, 70);
       }
       var item_image_five = new Image();
-      item_image_five.src = items_on_page[2]+".png";
+      item_image_five.src = items_on_page[4]+".png";
       item_image_five.onload = function(){
         context.drawImage(item_image_five, items_locations[5][0], items_locations[5][1], 70, 70);
       }
       var item_image_six = new Image();
-      item_image_six.src = items_on_page[3]+".png";
+      item_image_six.src = items_on_page[5]+".png";
       item_image_six.onload = function(){
         context.drawImage(item_image_six, items_locations[6][0], items_locations[6][1], 70, 70);
       }
       var item_image_left = new Image();
-      item_image_left.src = "left.png";
+      item_image_left.src = "Left.png";
       item_image_left.onload = function(){
         context.drawImage(item_image_left, items_locations[0][0], items_locations[0][1], 70, 70);
       }
       var item_image_right = new Image();
-      item_image_right.src = "right.png";
+      item_image_right.src = "Right.png";
       item_image_right.onload = function(){
         context.drawImage(item_image_right, items_locations[7][0], items_locations[7][1], 70, 70);
       }
     }
   }
+  make_base1();
   function main_loop() {
-    make_base();
+    make_base2();
     make_items();
     allow_right_left = "t";
-    document.getElementById("randomstuff").innerHTML = info_location;
   }
   var t=setInterval(main_loop(),500);
 </script>
