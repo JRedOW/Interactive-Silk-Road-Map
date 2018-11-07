@@ -150,12 +150,16 @@
       var item_image_left = new Image();
       item_image_left.src = "Left.png";
       item_image_left.onload = function(){
-        context.drawImage(item_image_left, items_locations[0][0], items_locations[0][1], 70, 70);
+        if (items[info_location].length > 6 && info_page > 1) {
+          context.drawImage(item_image_left, items_locations[0][0], items_locations[0][1], 70, 70);
+        }
       }
       var item_image_right = new Image();
       item_image_right.src = "Right.png";
       item_image_right.onload = function(){
-        context.drawImage(item_image_right, items_locations[7][0], items_locations[7][1], 70, 70);
+        if (items[info_location].length > 6 && Math.ceil(items[info_location].length/6) > info_page) {
+          context.drawImage(item_image_right, items_locations[7][0], items_locations[7][1], 70, 70);
+        }
       }
     }
   }
